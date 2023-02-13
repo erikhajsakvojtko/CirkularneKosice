@@ -1,3 +1,70 @@
+var idle = document.getElementById("idle");
+var idleLoading = document.getElementById("idleLoading");
+var video = document.getElementById("video");
+
+
+var cursor = document.getElementById("cursor");
+var cursorIcon = document.getElementById("mousePointer");
+//idle
+idle.addEventListener('mousemove', function () {
+  idle.style.display = "none";
+  idleLoading.style.display = "";
+  setTimeout(() => {
+    
+    video.style.display = "";
+    idleLoading.style.display = "none";
+    video.play();
+
+  }, 2000);
+}, false);
+
+function idleLogout() {
+  var t;
+  window.onload = resetTimer;
+  window.onmousemove = resetTimer;
+  window.onmousedown = resetTimer;  // catches touchscreen presses as well      
+  window.ontouchstart = resetTimer; // catches touchscreen swipes as well      
+  window.ontouchmove = resetTimer;  // required by some devices 
+  window.onclick = resetTimer;      // catches touchpad clicks as well
+  window.onkeydown = resetTimer;   
+  window.addEventListener('scroll', resetTimer, true); // improved; see comments
+
+  function yourFunction() {
+    idle.style.display = "";
+  }
+
+  function resetTimer() {
+      clearTimeout(t);
+      t = setTimeout(yourFunction, 50000);  // time is in milliseconds
+  }
+}
+idleLogout();
+
+
+var videoPin = document.getElementById("videoPin");
+videoPin.style.width = "100%";
+videoPin.style.height = "100%";
+
+var loadingCircle = document.getElementById("loadingCircle");
+loadingCircle.style.width = "100%";
+loadingCircle.style.height = "100%";
+
+//Onclick popup
+videoPin.addEventListener('mousedown', function(){
+  var w = 1600;
+  var h = 800;
+  var left = (window.screen.width / 2) - ((w / 2) + 10);
+  var top = (window.screen.height / 2) - ((h / 2) + 50);
+
+  popupWindow("https://www.google.com/maps/d/u/2/viewer?mid=1BMG5_Bmz6TW-a8jIDN-kN2WSqeUDTKc&ll=48.69871535105282%2C21.230188550000005&z=12", "Mapa", window, 1000,800);
+}, false);
+
+function popupWindow(url, windowName, win, w, h) {
+  const y = win.top.outerHeight / 2 + win.top.screenY - ( h / 2);
+  const x = win.top.outerWidth / 2 + win.top.screenX - ( w / 2);
+  return win.open(url, windowName, `toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width=${w}, height=${h}, top=${y}, left=${x}`);
+}
+
 //pozicovne
 var Pozicovne = document.getElementById('Pozicovne');
 var PozicovnePodnadpis = document.getElementById('PozicovnePodnadpis');
@@ -180,7 +247,7 @@ var NadpisPodkategorie_Servisy_Odev = document.getElementById('NadpisPodkategori
 var VypisPodkategorie_ServisyOpravovne_Cyklisticke = document.getElementById('VypisPodkategorie_ServisyOpravovne_Cyklisticke');
 var VypisPodkategorie_ServisyOpravovne_Elektro = document.getElementById('VypisPodkategorie_ServisyOpravovne_Elektro');
 var VypisPodkategorie_ServisyOpravovne_Obuv = document.getElementById('VypisPodkategorie_ServisyOpravovne_Obuv');
-//var VypisPodkategorie_ServisyOpravovne_Odev = document.getElementById('VypisPodkategorie_ServisyOpravovne_Odev');
+var VypisPodkategorie_ServisyOpravovne_Odev = document.getElementById('VypisPodkategorie_ServisyOpravovne_Odev');
 
 Podklad_Servisy.style.opacity = "0";
 NadpisKategorie_ServisyOpravovne.style.opacity = "0";
@@ -204,7 +271,7 @@ NadpisPodkategorie_Servisy_Odev.style.opacity = "0";
 VypisPodkategorie_ServisyOpravovne_Cyklisticke.style.opacity = "0";
 VypisPodkategorie_ServisyOpravovne_Elektro.style.opacity = "0";
 VypisPodkategorie_ServisyOpravovne_Obuv.style.opacity = "0";
-//VypisPodkategorie_ServisyOpravovne_Odev.style.opacity = "0";
+VypisPodkategorie_ServisyOpravovne_Odev.style.opacity = "0";
 
 var VsetkyBodky_ServisyOpravovne = document.getElementById('VsetkyBodky_ServisyOpravovne');
 var BodkyServisyOpravovne_Odev = document.getElementById('BodkyServisyOpravovne_Odev');
